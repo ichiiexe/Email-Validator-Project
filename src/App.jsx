@@ -44,9 +44,10 @@ const EmailValidator = () => {
     }
 
     const domainParts = domain.split(".");
+    const tld = domainParts.pop();
 
     //check if domain has characters that are invalid//
-    if (!/^[a-zA-Z-.]*$/.test(domain)) {
+    if (!/^[a-zA-Z.]*$/.test(domain)) {
       setIsValid(false);
       return;
     }
@@ -64,31 +65,24 @@ const EmailValidator = () => {
     }
 
     //check if there are consecutive dots//
-    if (/\.{3,}/.test(domain)) {
-      setIsValid(false);
-      return;
-    }
-
-    //check if there are three or more dots//
-    if (/([^.]*\.){3}/.test(domain)) {
+    if (/\.{2,}/.test(domain)) {
       setIsValid(false);
       return;
     }
 
     //check if tld is 2 characters long//
-    if (domainParts[1].length < 2) {
+    if (tld.length < 2) {
       setIsValid(false);
       return;
     }
 
     //check if tld is only letters//
-    if (!/^[a-zA-Z]+$/.test(domainParts[1])) {
-      setError("Top-level domain must contain only letters");
+    if (!/^[a-zA-Z]+$/.test(tld)) {
       setIsValid(false);
       return;
     }
 
-    console.log(domainParts[1]);
+    console.log(tld);
     setIsValid(true);
   };
 
