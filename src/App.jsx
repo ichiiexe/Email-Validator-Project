@@ -52,18 +52,6 @@ const EmailValidator = () => {
       return;
     }
 
-    //check if domain starts with hyphen or dot//
-    if (domain.startsWith("-") || domain.startsWith(".")) {
-      setIsValid(false);
-      return;
-    }
-
-    //check if domain ends with hyphen or dot//
-    if (domain.endsWith("-") || domain.endsWith(".")) {
-      setIsValid(false);
-      return;
-    }
-
     //check if there are consecutive dots//
     if (/\.{2,}/.test(domain)) {
       setIsValid(false);
