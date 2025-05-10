@@ -46,7 +46,7 @@ const EmailValidator = () => {
     const domainParts = domain.split(".");
 
     //check if domain has characters that are invalid//
-    if (!/^[a-zA-Z0-9-.]*$/.test(domain)) {
+    if (!/^[a-zA-Z-.]*$/.test(domain)) {
       setIsValid(false);
       return;
     }
@@ -64,13 +64,19 @@ const EmailValidator = () => {
     }
 
     //check if there are consecutive dots//
-    if (/\.{2,}/.test(domain)) {
+    if (/\.{3,}/.test(domain)) {
+      setIsValid(false);
+      return;
+    }
+
+    //check if there are three or more dots//
+    if (/([^.]*\.){3}/.test(domain)) {
       setIsValid(false);
       return;
     }
 
     //check if tld is 2 characters long//
-    if (domainParts[1].length > 2) {
+    if (domainParts[1].length < 2) {
       setIsValid(false);
       return;
     }
